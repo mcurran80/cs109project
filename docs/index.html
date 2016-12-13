@@ -11938,11 +11938,32 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Our-Method">Our Method<a class="anchor-link" href="#Our-Method">&#182;</a></h3><ul>
-<li>Strangeness</li>
-<li>p-values</li>
-<li>Martingale</li>
+<h3 id="Our-Method">Our Method<a class="anchor-link" href="#Our-Method">&#182;</a></h3><p>In this project we apply the idea of testing exchangeability online (Vovk et al., 2003) using a martingale framework to detect concept changes in time-varying data streams.</p>
+<p>In brief, the anomaly detection happens by performing the following steps:</p>
+<ol>
+<li>A data point from the incoming stream is observed.</li>
+<li>A strangeness measure is calculated.</li>
+<li>A p-value is calculated (H0 is no concept change).</li>
+<li>A randomized power martingale is constructed.</li>
+<li>A test is performed using the martingale value.</li>
+</ol>
+<h4 id="Strangeness">Strangeness<a class="anchor-link" href="#Strangeness">&#182;</a></h4><p>We wanted our strangeness measure to:</p>
+<ul>
+<li>be able to handle multi-dimensional time series  </li>
+<li>be able to handle unlabeled data</li>
+<li>be simple and flexible </li>
 </ul>
+<p>We decided to implement two methods, both based on the well-known k-nearest neighbors algorithm:</p>
+<ol>
+<li>Proximity based - maximum distance in the neighborhood.</li>
+<li>Density based - relative density in the neighborhood.</li>
+</ol>
+<p>The maximum distance in the neighborhood measure is straightforward: given a point and a neighborhood of size k, we find a distance to the furthest point away in the neighborhood.</p>
+<p>The relative density is a bit more involved. Given a neighborhood of size k, we measure density as an inverse of the sum of all distances between the point and its neighbors. The relative density is calculated by dividing the point density by sum of densities for all the k-nearest neighbors.</p>
+<h4 id="P-Values">P-Values<a class="anchor-link" href="#P-Values">&#182;</a></h4><p>is calculated as:</p>
+$$p = \frac{ count(i:a_{i} > a_{n}) + \theta*count(i:a_{i} = a_{n}) }{n}$$<p>where $a_{i}$ is the strangeness measure for $i-th$ observation and $\theta$ is randomly chosen from $[0, 1]$</p>
+<h4 id="Martingale">Martingale<a class="anchor-link" href="#Martingale">&#182;</a></h4><p>is calculated as:</p>
+$$M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$$<p>where $\epsilon$ is a float value from $[0, 1]$</p>
 
 </div>
 </div>
@@ -11962,10 +11983,36 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="How-We-Calculate-Strangeness">How We Calculate Strangeness<a class="anchor-link" href="#How-We-Calculate-Strangeness">&#182;</a></h3><ul>
-<li>KNN-based, density, proximity</li>
-<li>Examples of behavior</li>
+<h3 id="How-We-Calculate-Strangeness">How We Calculate Strangeness<a class="anchor-link" href="#How-We-Calculate-Strangeness">&#182;</a></h3><h4 id="Strangeness-Measure-by-the-Metrics">Strangeness Measure by the Metrics<a class="anchor-link" href="#Strangeness-Measure-by-the-Metrics">&#182;</a></h4><p>Our strangeness measures can use the following distance metrics:</p>
+<ul>
+<li>'euclidean' EuclideanDistance:  $sqrt(sum((x - y)^2))$</li>
+<li>'manhattan' ManhattanDistance:  $sum(|x - y|)$</li>
+<li>'chebyshev' ChebyshevDistance   $max(|x - y|)$</li>
 </ul>
+<p>In our experiment, it is not so obvious which distance should be used and why, but when we work with high dimensional data, we should try all of them.</p>
+<h4 id="KNN-based,-density,-proximity">KNN-based, density, proximity<a class="anchor-link" href="#KNN-based,-density,-proximity">&#182;</a></h4><p>With n_neighbors = 1, the relative density measure would not be able to detect observations slowly moving away from the cluster. It looks like we should use a 'conventional' value for n_neighbors (between 3 or 5 in most cases).</p>
+<p>The proximity measure did well in this scenario with all of the neighborhood sizes. It also looks like larger neighborhood sizes allow the measure to stay 'strange' for longer time periods (that is why it did well here).</p>
+<p>Again, the separate cluster forming was easily detected by both measures. The relative density appears a bit more stable and tolerant to initial cluster building, but the proximity measure could potentially produce large values for longer time periods, which could be beneficial as we would like our martingale to have enough time for confidence building.</p>
+<p>It is obvious the martingale needs to build a confidence level by receiving quite a few small p-values before the threshold is reached. That might not work very well in conjunction with KNN-based metrics as the strangeness measure might go down as soon as the new neighborhood is built.</p>
+<p>This experiment highlights a possible weakness in our model: a small neighborhood size could prevent us from detecting underlying changes in the data stream. In this case, as soon as the number of observation in the separate cluster reached the neighborhood size, the relative density went down and the martingale did not have enough time to build the confidence.</p>
+<p>The proximity strangeness measure seems to be the weaker option. More investigation should be done to understand where it is applicable.</p>
+<h4 id="Epsilon">Epsilon<a class="anchor-link" href="#Epsilon">&#182;</a></h4><p>The initial martingale value is $M_{0} = 1.0$ and with every new observation we calculate the martingale value as $M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$, where $p$ is the p-value.</p>
+<p>Changing the epsilon value changes how quickly the martingale rises/falls in the presence of very small or large p-values.</p>
+<p>Let's simulate a stream of p-values perhaps indicating some change in the middle of the stream and observe changes in the martingale value for different epsilon values.</p>
+<p>From the chart above, we could see that small epsilon values should not be used for stable streams. A martingale calculated with epsilon = 0.15 would need more then 1000 observations with p-values of 0.1 to breach a threshold of 10.</p>
+<p>On the chart above, we see how the epsilon value plays a role in the martingale calculation. The concept change happens at step five and all the martingales reach maximum value around step 14 (at different levels). If we set the threshold at level 4.0, then a martingale with epsilon = 0.65 would detect the change at step 10 while martingale with epsilon 0.35 would detect the change at step 14. It looks like too small or too big an epsilon value might not be very sensitive to the changes, and the best performing epsilon values in this case are in 0.75 - 0.95 range.</p>
+<h4 id="Default-Values">Default Values<a class="anchor-link" href="#Default-Values">&#182;</a></h4><ul>
+<li>the neighborhood consists of 3 neighbors</li>
+<li>density calculated relatively to total density in the neighborhood</li>
+<li>euclidean distance is used</li>
+<li>epsilon = 0.92</li>
+</ul>
+<h4 id="Examples-of-behavior">Examples of behavior<a class="anchor-link" href="#Examples-of-behavior">&#182;</a></h4><p>?????</p>
+<ul>
+<li>our default martingale calculation is not very sensitive to the sharp but short lived changes of the strangeness measure</li>
+<li>changes in the neighborhood size might have a lot of influence on the relative density calculation and the martingale value</li>
+</ul>
+<h4 id="Detecting-Mutiple-Changes">Detecting Mutiple Changes<a class="anchor-link" href="#Detecting-Mutiple-Changes">&#182;</a></h4><p>Because of the way we calculate the p-values, we will not be able to detect some sequence of the concept changes. For example, if our system changes from state A to state B, we might be able to detect the change. But the change from B back to A will be unnoticeable because the values associated with state A had been observed before. We might be able to solve this problem by introducing some kind of expiration policy on the historical values.</p>
 
 </div>
 </div>
@@ -12032,10 +12079,26 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Method-We-Developed">Method We Developed<a class="anchor-link" href="#Method-We-Developed">&#182;</a></h3><ul>
-<li>How to Use</li>
-<li>Parameters</li>
-</ul>
+<h3 id="Method-We-Developed">Method We Developed<a class="anchor-link" href="#Method-We-Developed">&#182;</a></h3><h4 id="How-To-Use">How To Use<a class="anchor-link" href="#How-To-Use">&#182;</a></h4><p>?????</p>
+<h4 id="Parameters">Parameters<a class="anchor-link" href="#Parameters">&#182;</a></h4><p>Our class is called KNNAnomalyDetector and it accepts the following parameters:</p>
+
+<pre><code>threshold - float, optional (default value 2.0)
+    an anomaly is reported when the threshold is breached
+epsilon - float, optional (default value 0.92)
+    Value from 0.0 to 1.0, used in the martingale calculation
+n_neighbors - int, optional (default value 3)
+    The neighborhood size
+metric - string, optional (default value 'euclidean')
+    The distance metric used to calculate the k-neighbors for each sample point
+method - string , 'density' or 'proximity,' default value 'density'
+    Method of calculating the strangeness function. 
+    When 'density' the strangeness is calculated as density around the point 
+    divided by total density around the neighborhood
+    When 'proximity' the strangeness is calculated as maximum distance in the the neighborhood
+anomaly - string , 'level' or 'change,' default value 'level'
+    Method of using the threshold
+    When 'level,' the martingale value is compared with the threshold
+    When 'change,' the change in martingale value is compared with the threshold</code></pre>
 
 </div>
 </div>
