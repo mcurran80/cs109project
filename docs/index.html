@@ -11791,12 +11791,26 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-an-Anomaly?">What is an Anomaly?<a class="anchor-link" href="#What-is-an-Anomaly?">&#182;</a></h3><ul>
-<li>Discussion of anomalies vs. outliers</li>
-<li>Why it is interesting to detect anomalies (soemthing we do not know)</li>
-<li>Attempt to detect outliers in MSFT, problems with this approach</li>
-<li>Why we need multidimensional data</li>
+<h3 id="What-is-an-Anomaly?">What is an Anomaly?<a class="anchor-link" href="#What-is-an-Anomaly?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>An anomaly is defined as something that deviates from what is standard, normal, or expected.</p>
+<h4 id="Anomalies-Versus-Outliers">Anomalies Versus Outliers<a class="anchor-link" href="#Anomalies-Versus-Outliers">&#182;</a></h4><p>An outlier is a legitimate data point originated from a real observation whereas an anomaly is illegitimate and produce by an artificial process. In data mining, anomaly is the set of data points that are considerably different than the remainder of the data. Anomaly detection is the identification of data points, items, observations or events that do not conform to the expected pattern of a given group. Anomaly detection is also known as outlier detection. Anomaly detection is a form of classification.</p>
+<h4 id="Why-it-is-Interesting-to-Detect-Anomalies-(Something-We-Do-Not-Know-Happened)">Why it is Interesting to Detect Anomalies (Something We Do Not Know Happened)<a class="anchor-link" href="#Why-it-is-Interesting-to-Detect-Anomalies-(Something-We-Do-Not-Know-Happened)">&#182;</a></h4><p>It is interesting to identify unusual or suspicious cases based on deviation from the norm within data that is seemingly homogeneous or follow a pattern.</p>
+<p>Anomaly detection is an important tool:</p>
+<ul>
+<li>in data exploration</li>
+<li>and unsupervised learning</li>
 </ul>
+<p>These anomalies though infrequent may signify a large and significant threat such as cyber intrusions or fraud.</p>
+<h4 id="Attempt-to-Detect-Outliers-in-MSFT,-Problems-with-this-Approach">Attempt to Detect Outliers in MSFT, Problems with this Approach<a class="anchor-link" href="#Attempt-to-Detect-Outliers-in-MSFT,-Problems-with-this-Approach">&#182;</a></h4><p>?????</p>
+<h4 id="Why-We-Need-Multidimensional-Data">Why We Need Multidimensional Data<a class="anchor-link" href="#Why-We-Need-Multidimensional-Data">&#182;</a></h4><p>An anomaly may be triggered due to one unusual value in a dimension, or a combination of multiple dimensions falling out of bounds. Anomaly detection in a time-series data poses computational challenges, especially for high-dimensional, large data sets.</p>
 
 </div>
 </div>
@@ -11898,10 +11912,13 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-a-Martingale?">What is a Martingale?<a class="anchor-link" href="#What-is-a-Martingale?">&#182;</a></h3><ul>
-<li>History of the term</li>
-<li>Why it represents confidence</li>
-</ul>
+<h3 id="What-is-a-Martingale?">What is a Martingale?<a class="anchor-link" href="#What-is-a-Martingale?">&#182;</a></h3><p>A martingale is defined as any of several systems of betting in which a player increases the stake usually by doubling each time a bet is lost (reference <a href="https://www.system-martingale.com/">https://www.system-martingale.com/</a>).</p>
+<h4 id="History-of-the-term">History of the term<a class="anchor-link" href="#History-of-the-term">&#182;</a></h4><ol>
+<li>The concept of martingale in probability theory was introduced by Paul Pierre Levy (1935),</li>
+<li>Much of the original development of the theory was done by Doob (1949, Application of the theory of martingales; 1953, Stochastic Process).</li>
+<li>Part of the motivation for works on Martingale was to show the impossibility of successful betting strategies.</li>
+</ol>
+<h4 id="Why-it-represents-confidence">Why it represents confidence<a class="anchor-link" href="#Why-it-represents-confidence">&#182;</a></h4><p>?????</p>
 
 </div>
 </div>
@@ -12138,7 +12155,10 @@ Ma, Junshui, &amp; Perkins, Simon. (2003a). Online novelty detection on temporal
 <p>Protopapas, P., Giammarco, J., Faccioli, L., Struble, M., Dave, R., &amp; Alcock, C. (2006). Finding outlier light curves in catalogues of periodic variable stars. Monthly Notices of the Royal Astronomical Society, 369(2), 677-696.</p>
 <p>Rebbapragada, U., Protopapas, P., Brodley, C., &amp; Alcock, C. (2009) Finding anomalous periodic time series. Machine Learning, 74(3), 281-313.</p>
 <p>Salvador, S., &amp; Chan, P. (2005). Learning states and rules for detecting anomalies in time series. Applied Intelligence, 23(3), 241-255.</p>
+<p>Shafer, G., and Vovk, V. (2001) Probability and Finance: It’s only a Game! Wiley-Interscience.</p>
 <p>Qiao, Xin, Bin, &amp; Qiao, Y. (2002). Anomaly intrusion detection method based on HMM. Electronics Letters, 38(13), 663-664.</p>
+<p>Vovk, V. (1993) A Logic of Probability, with Application to the Foundations of Statistics, Journal of the Royal Statistical Society, Series B (Methodological), Vol. 55, 2, 317-351.</p>
+<p>Vovk, V., Shafer, Glenn, &amp; Gammerman, A. (2005). Algorithmic Learning in a Random World.</p>
 <p>Vovk, V., Nouretdinov, I., Gammerman, A. (2003) Testing exchangeability on-line. Proceedings of the Twentieth International Conference on Machine Learning (ICML-2003), Washington DC.</p>
 <p>Zhang, X., Fan, P., &amp; Zhu, Z. (2003). A new anomaly detection method based on hierarchical HMM. Parallel and Distributed Computing, Applications and Technologies, 2003. PDCAT'2003. Proceedings of the Fourth International Conference on, 249-252.</p>
 <p>Zhang, J., Tsui, F., Wagner, M., &amp; Hogan, W. (2003). Detection of outbreaks from time series data using wavelet transform. AMIA Annual Symposium Proceedings. AMIA Symposium, 748-52.</p>
