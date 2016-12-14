@@ -11746,38 +11746,6 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">FileIO</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-5-f61e81f11d55&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">import</span> FileIO
-
-<span class="ansi-red-fg">ImportError</span>: No module named FileIO</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11796,6 +11764,60 @@ div#notebook {
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+
+<span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;&lt;script&gt;</span>
+<span class="s1">code_show=true;</span>
+<span class="s1">function code_toggle() {</span>
+<span class="s1"> if (code_show){</span>
+<span class="s1"> $(&#39;div.input&#39;).hide();</span>
+<span class="s1"> } else {</span>
+<span class="s1"> $(&#39;div.input&#39;).show();</span>
+<span class="s1"> }</span>
+<span class="s1"> code_show = !code_show</span>
+<span class="s1">}</span>
+<span class="s1">$( document ).ready(code_toggle);</span>
+<span class="s1">&lt;/script&gt;</span>
+<span class="s1">&lt;form action=&quot;javascript:code_toggle()&quot;&gt;&lt;input type=&quot;submit&quot; value=&quot;Click here to toggle on/off the raw code.&quot;&gt;&lt;/form&gt;&#39;&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<script>
+code_show=true;
+function code_toggle() {
+ if (code_show){
+ $('div.input').hide();
+ } else {
+ $('div.input').show();
+ }
+ code_show = !code_show
+}
+$( document ).ready(code_toggle);
+</script>
+<form action="javascript:code_toggle()"><input type="submit" value="Click here to toggle on/off the raw code."></form>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -11829,7 +11851,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -11857,16 +11879,6 @@ div#notebook {
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="images/outlaw.png" alt=""></p>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -11985,7 +11997,46 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-a-Martingale?">What is a Martingale?<a class="anchor-link" href="#What-is-a-Martingale?">&#182;</a></h3><p>&lt;img src="images/chimp.png", width=274, height=265&gt;</p>
+<h3 id="What-is-a-Martingale?">What is a Martingale?<a class="anchor-link" href="#What-is-a-Martingale?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
+
+&lt;img src=&quot;images/chimp.png&quot;, width=274, height=265&gt;
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+
+<img src="images/chimp.png", width=274, height=265>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>A martingale is defined as any of several systems of betting in which a player increases the stake usually by doubling each time a bet is lost (reference <a href="https://www.system-martingale.com/">https://www.system-martingale.com/</a>).</p>
 <h4 id="History-of-the-term">History of the term<a class="anchor-link" href="#History-of-the-term">&#182;</a></h4><ol>
 <li>The concept of martingale in probability theory was introduced by Paul Pierre Levy (1935),</li>
@@ -12211,13 +12262,52 @@ The data was obtained from <a href="https://www.microsoft.com/en-us/Investor/inv
 The SEC filings data was obtained from <a href="https://www.microsoft.com/en-us/Investor/sec-filings.aspx">https://www.microsoft.com/en-us/Investor/sec-filings.aspx</a>. It was manually copied and converted into CSV format. It was available from 1994 and consists of the filing date and the document type. In our dataset, it is represented by a set of dummy variables. The variable name is the document type and the value is one if the document type was filed on the date, zero otherwise.</p>
 <p><strong>Data Refresh</strong>
 Only the adjusted closed price is automatically refreshed and includes the newest data. All other sources have to be manually updated by downloading relevant files from the sources.</p>
-<p>&lt;img src="images/msft_adj_close.png", width=554, height=419&gt;</p>
-<p>&lt;img src="images/outliers_first_diff.png", width=554, height=288&gt;</p>
-<p>&lt;img src="images/outliers_second_diff.png", width=554, height=288&gt;</p>
-<p>&lt;img src="images/one_class_svm.png", width=554, height=288&gt;</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
+
+&lt;img src=&quot;images/msft_adj_close.png&quot;, width=554, height=419&gt;
+
+&lt;img src=&quot;images/outliers_first_diff.png&quot;, width=554, height=288&gt;
+
+&lt;img src=&quot;images/outliers_second_diff.png&quot;, width=554, height=288&gt;
+
+&lt;img src=&quot;images/one_class_svm.png&quot;, width=554, height=288&gt;
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+
+<img src="images/msft_adj_close.png", width=554, height=419>
+
+<img src="images/outliers_first_diff.png", width=554, height=288>
+
+<img src="images/outliers_second_diff.png", width=554, height=288>
+
+<img src="images/one_class_svm.png", width=554, height=288>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -12234,7 +12324,46 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Detecting-Anomalies">Detecting Anomalies<a class="anchor-link" href="#Detecting-Anomalies">&#182;</a></h3><p>&lt;img src="images/gates.png", width=366, height=206&gt;</p>
+<h3 id="Detecting-Anomalies">Detecting Anomalies<a class="anchor-link" href="#Detecting-Anomalies">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
+
+&lt;img src=&quot;images/gates.png&quot;, width=366, height=206&gt;
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+
+<img src="images/gates.png", width=366, height=206>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>Run for 120, 360 days, explain results</li>
 <li>Are they really anomalies?</li>
