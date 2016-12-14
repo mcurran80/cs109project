@@ -11767,7 +11767,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
@@ -11795,7 +11795,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <script>
@@ -11824,8 +11824,50 @@ $( document ).ready(code_toggle);
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h3><p>The global economy is a very complex system. The stock market is an integral part of the global economy due to its high returns. The stock market is highly correlated to an extent that any fluctuation in this market influences individual and corporate finances that drives the economic health of a country. Stock price forecasting is a popular and important topic in financial and Academic studies; it is marked more by its failure than by its successes since stock prices reflect the judgments and expectations of investors, based on the information available. There is so much uncertainty in the market predictability so that no one can predict where the market will be at the end of the week. Under favorable conditions, the price moves upward so quickly that the investor has little or no time to act upon it. The multiple model building in the prediction of stock prices efforts has shown that the market fluctuations are essentially unpredictable. Time series analysis is the most common and fundamental method used to perform this task. The daily behavior of the market prices reveals that the future stock prices cannot be predicted based on past movements. In this study, we analyzed the behavior of Microsoft stock market prices. We are developing a method of detecting anomalies in non-labeled time series data with adjustable confidence and sensitivity. We will be applying this to the adjusted closing price of Microsoft stock. Overall, the stock price of Microsoft is found to follow the martingale.</p>
-<p>If the time series of a stock price follows a martingale, then its return is purely non-predictable and investors are unable to make abnormal returns consistently over time.</p>
+<h3 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h3><p>Here is a chart of Microsoft adjusted closing price for the past 20 years:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
+
+&lt;img src=&quot;images/msft_adj_close.png&quot;, width=369, height=279&gt;
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+
+<img src="images/msft_adj_close.png", width=369, height=279>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If we only use this chart to draw our conclusions about the company, we could say that Microsoft enjoyed a rapid stock growth in the late nineties, followed by almost 13 years of stagnation, and finally enjoying a very impressive stock rally in the past few years. That is just the big picture, but if we look at the data in more detail, we’ll see many more local ups and downs during each month, week, and even each day (sadly, for this project we do not have the intraday data).</p>
+<p>Our goal for this project is to develop a system of detecting anomalies by observing the daily stock prices one by one (in so-called ‘online’ mode). We also would like to be able to do it with some configurable confidence level.</p>
+<p>At this point, we would like the reader to think about <em>anomalies</em> as unusual price levels or changes where we cannot explain why the price went up or down or stayed flat. We will expand upon this in the sections below.</p>
 
 </div>
 </div>
@@ -11885,17 +11927,14 @@ $( document ).ready(code_toggle);
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>An anomaly is defined as something that deviates from what is standard, normal, or expected.</p>
-<h4 id="Anomalies-Versus-Outliers">Anomalies Versus Outliers<a class="anchor-link" href="#Anomalies-Versus-Outliers">&#182;</a></h4><p>An outlier is a legitimate data point originated from a real observation whereas an anomaly is illegitimate and produce by an artificial process. In data mining, anomaly is the set of data points that are considerably different than the remainder of the data. Anomaly detection is the identification of data points, items, observations or events that do not conform to the expected pattern of a given group. Anomaly detection is also known as outlier detection. Anomaly detection is a form of classification.</p>
-<h4 id="Why-it-is-Interesting-to-Detect-Anomalies-(Something-We-Do-Not-Know-Happened)">Why it is Interesting to Detect Anomalies (Something We Do Not Know Happened)<a class="anchor-link" href="#Why-it-is-Interesting-to-Detect-Anomalies-(Something-We-Do-Not-Know-Happened)">&#182;</a></h4><p>It is interesting to identify unusual or suspicious cases based on deviation from the norm within data that is seemingly homogeneous or follow a pattern.</p>
-<p>Anomaly detection is an important tool:</p>
-<ul>
-<li>in data exploration</li>
-<li>and unsupervised learning</li>
-</ul>
-<p>These anomalies though infrequent may signify a large and significant threat such as cyber intrusions or fraud.</p>
-<h4 id="Attempt-to-Detect-Outliers-in-MSFT,-Problems-with-this-Approach">Attempt to Detect Outliers in MSFT, Problems with this Approach<a class="anchor-link" href="#Attempt-to-Detect-Outliers-in-MSFT,-Problems-with-this-Approach">&#182;</a></h4><p>?????</p>
-<h4 id="Why-We-Need-Multidimensional-Data">Why We Need Multidimensional Data<a class="anchor-link" href="#Why-We-Need-Multidimensional-Data">&#182;</a></h4><p>An anomaly may be triggered due to one unusual value in a dimension, or a combination of multiple dimensions falling out of bounds. Anomaly detection in a time-series data poses computational challenges, especially for high-dimensional, large data sets.</p>
+<p>It is very easy to define what an outlier is if we know the underlying distribution shape. Let’s say we know our system generates observations from a normal distribution with a mean of 0.0 and standard deviation of 1.0, and we observe a value of 3.0. Knowing normal distribution properties, we could calculate that the probability of observing this value (or larger) is around 0.0013. It is quite low, and if we are willing to set our threshold at 0.025 (completely arbitrarily), then we could declare our observation an outlier (because the probability of our observation is lower than the threshold).</p>
+<p>This particular observation can also be called an “anomaly,” and in general, the terms “anomaly” and “outlier” are very often used interchangeably.</p>
+<p>We’d like to use the term “anomaly” to describe something different from “outlier.”</p>
+<p>Our null hypothesis is that we observe data points generated from a normal distribution with a mean of 0.0 and standard deviation of 1.0. We set the threshold at 0.025. That means that we consider any values less than – 1.96 or more than +1.96 to be outliers.</p>
+<p>Even if we don’t know anything about the underlying distribution, we could potentially use heuristic methods to define outliers. For example, in the Tukey method, if $value < Q1 - 1.5*IQR$ or $value > Q3 + 1.5*IQR$, then it is an outlier.</p>
+<p>In our context we’d like to use the term “anomaly” to describe a very different concept from “outlier.”</p>
+<p>We’d like to use the term “anomaly” as a point in time where we think our null hypothesis does not stand any more. Let’s say we observed quite a few outliers, and other values which may be not outliers but still quite extreme considering our null hypothesis. At some point in time, we should reject our null hypothesis and conclude that we detected an anomaly.</p>
+<p>Even more generally, we’d like to call an “anomaly” a point of time where we believe the underlying distribution has changed even if we do not exactly know the shape of the distribution, so our null hypothesis becomes “there is no change in the underlying distribution.”</p>
 
 </div>
 </div>
@@ -11978,6 +12017,79 @@ $( document ).ready(code_toggle);
 </tr>
 </tbody>
 </table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Why-We-Detect-Anomalies">Why We Detect Anomalies<a class="anchor-link" href="#Why-We-Detect-Anomalies">&#182;</a></h3><p>Well, we tried to detect outliers in the Microsoft stock. It turned out that nothing is normally distributed (we tried adjusted closing price, closing price change from previous day, and closing price difference from 7, 30 and 120 day moving averages and also some transformations of the previous including LOG, SQRT and some others). We had to look at one of the heuristic methods, the Turkey method, and saw something like:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On the chart above, the red dots are outliers detected in the values representing the difference between the 120 day moving average and the closing price of the Microsoft stock. On those dates, the change in the price was somehow “extreme,” probably because they were much bigger than usual.</p>
+<p>We immediately realised we have a couple of problems:</p>
+<ol>
+<li>We need a context. Using just the closing price or its derivatives could be truly misleading. We need to include more data about general market conditions, state of the economy, and state of the company on that date to truly see if something “extreme” happened. </li>
+<li>Detecting an outlier is of a limited use for us. It could be just a randomness in the process and we’d like to be able to capture the underlying change with some kind of confidence. </li>
+</ol>
+<p>That is the main difference between detecting outliers and anomalies: we detect outliers to exclude them from our model because they might just represent some randomness we do not want to capture.</p>
+<p>We detect anomalies to conclude (with some level of confidence) that something has changed in the underlying process. One way of looking at this would be to say that we have some variables not included in our model and not being observed and some of them are quite significant and their values have changed.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Anomalies-in-Stock-Market-Data">Anomalies in Stock Market Data<a class="anchor-link" href="#Anomalies-in-Stock-Market-Data">&#182;</a></h3><p>Let’s face it – there’s been no anomalies in the stock market for past 10 years, since the participants started to use very powerful computers to find any kind of discrepancies and capitalize on the findings. We understand that and we set our goals at an appropriate level.</p>
+<p>We are likely to find anomalies because of our limited ability to collect, and process data and it is a problem but also a solution for us.</p>
+<p>First of all, it does not undermine the method we use. Given a better data set (more variables, less aggregation), this method should work better and produce less false positives.</p>
+<p>Second, our imperfect data gives us an opportunity to manually validate our results. After all, we are not going to have a training set, so we deal with unlabelled data and ultimately our method is unsupervised. But since our anomalies likely have some legitimate reasons (not captured in our data set) we could validate them by simply searching for any related and significant events that happened around the time of the anomaly. We should thank Google for that opportunity.</p>
 
 </div>
 </div>
