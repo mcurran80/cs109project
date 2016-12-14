@@ -12262,11 +12262,153 @@ $$M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$$<p>where $\epsilon$ is a fl
 <li>euclidean distance is used</li>
 <li>epsilon = 0.92</li>
 </ul>
-<h4 id="Examples-of-behavior">Examples of behavior<a class="anchor-link" href="#Examples-of-behavior">&#182;</a></h4><p>?????</p>
-<ul>
-<li>our default martingale calculation is not very sensitive to the sharp but short lived changes of the strangeness measure</li>
-<li>changes in the neighborhood size might have a lot of influence on the relative density calculation and the martingale value</li>
-</ul>
+<h4 id="Examples-of-Behavior">Examples of Behavior<a class="anchor-link" href="#Examples-of-Behavior">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We created two simulated datasets to use in testing our algorithm.</p>
+<p>Sample 1: consists of a cluster of 100 points of stretched Gaussian data and a straight line of 10 points going away from the cluster. This represents a slow change.</p>
+<p>Sample 2: consists of a cluster of 30 points (less dense) of stretched Gaussian data and another cluster of 20 points building outside the main cluster. This represents a rapid change.</p>
+<p>Plots of these datasets are shown below.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
+
+&lt;img src=&quot;images/sample1_raw.png&quot;, width=589, height=322&gt;
+
+&lt;img src=&quot;images/sample2_raw.png&quot;, width=589, height=322&gt;
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+
+<img src="images/sample1_raw.png", width=589, height=322>
+
+<img src="images/sample2_raw.png", width=589, height=322>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When running these sample datasets with the default parameters, we get the following results:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
+
+&lt;img src=&quot;images/sample1_default.png&quot;, width=877, height=489&gt;
+
+&lt;img src=&quot;images/sample2_default.png&quot;, width=877, height=489&gt;
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+
+<img src="images/sample1_default.png", width=877, height=489>
+
+<img src="images/sample2_default.png", width=877, height=489>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When running these sample datasets with the tuned parameters epsilon and neighborhood size, we get the following results:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
+
+&lt;img src=&quot;images/sample1_tuned.png&quot;, width=877, height=489&gt;
+
+&lt;img src=&quot;images/sample2_tuned.png&quot;, width=877, height=489&gt;
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+
+<img src="images/sample1_tuned.png", width=877, height=489>
+
+<img src="images/sample2_tuned.png", width=877, height=489>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Detecting-Mutiple-Changes">Detecting Mutiple Changes<a class="anchor-link" href="#Detecting-Mutiple-Changes">&#182;</a></h4><p>Because of the way we calculate the p-values, we will not be able to detect some sequence of the concept changes. For example, if our system changes from state A to state B, we might be able to detect the change. But the change from B back to A will be unnoticeable because the values associated with state A had been observed before. We might be able to solve this problem by introducing some kind of expiration policy on the historical values.</p>
 
 </div>
@@ -12351,7 +12493,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12413,7 +12555,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12454,7 +12596,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12495,7 +12637,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12546,7 +12688,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12577,7 +12719,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12628,7 +12770,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12668,7 +12810,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12718,7 +12860,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12758,7 +12900,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12809,7 +12951,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
