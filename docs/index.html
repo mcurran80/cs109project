@@ -11928,13 +11928,11 @@ $( document ).ready(code_toggle);
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It is very easy to define what an outlier is if we know the underlying distribution shape. Let’s say we know our system generates observations from a normal distribution with a mean of 0.0 and standard deviation of 1.0, and we observe a value of 3.0. Knowing normal distribution properties, we could calculate that the probability of observing this value (or larger) is around 0.0013. It is quite low, and if we are willing to set our threshold at 0.025 (completely arbitrarily), then we could declare our observation an outlier (because the probability of our observation is lower than the threshold).</p>
-<p>This particular observation can also be called an “anomaly,” and in general, the terms “anomaly” and “outlier” are very often used interchangeably.</p>
-<p>We’d like to use the term “anomaly” to describe something different from “outlier.”</p>
-<p>Our null hypothesis is that we observe data points generated from a normal distribution with a mean of 0.0 and standard deviation of 1.0. We set the threshold at 0.025. That means that we consider any values less than – 1.96 or more than +1.96 to be outliers.</p>
-<p>Even if we don’t know anything about the underlying distribution, we could potentially use heuristic methods to define outliers. For example, in the Tukey method, if $value < Q1 - 1.5*IQR$ or $value > Q3 + 1.5*IQR$, then it is an outlier.</p>
-<p>In our context we’d like to use the term “anomaly” to describe a very different concept from “outlier.”</p>
-<p>We’d like to use the term “anomaly” as a point in time where we think our null hypothesis does not stand any more. Let’s say we observed quite a few outliers, and other values which may be not outliers but still quite extreme considering our null hypothesis. At some point in time, we should reject our null hypothesis and conclude that we detected an anomaly.</p>
-<p>Even more generally, we’d like to call an “anomaly” a point of time where we believe the underlying distribution has changed even if we do not exactly know the shape of the distribution, so our null hypothesis becomes “there is no change in the underlying distribution.”</p>
+<p>‪Even if we don’t know anything about the underlying distribution, we could potentially use heuristic methods to define outliers. For example, in the Tukey method, if $value<Q1−1.5∗IQRvalue<Q1−1.5∗IQR$ or $value>Q3+1.5∗IQRvalue>Q3+1.5∗IQR$, then it is an outlier.</p>
+<p>I general, the terms “anomaly” and “outlier” are very often used interchangeably, but we’d like to use the term “anomaly” to describe something different from “outlier.”‬</p>
+<p>Let’s say our null hypothesis is that we observe data points generated from some distribution with known properties.  Let’s also say we observed quite a few values which may be defined as “strange” or “unusual” considering our null hypothesis. At some point in time, we should reject our null hypothesis and conclude that we detected an anomaly.‬</p>
+<p>So we’d like to use term “anomaly” as a point in time where we think our null hypothesis does not stand any more.</p>
+<p>Even more generally, we’d like to call an “anomaly” a point of time where we believe the underlying distribution has changed even if we do not exactly know the shape of the distribution, so our null hypothesis becomes “there is no change in the underlying distribution.”‬</p>
 
 </div>
 </div>
@@ -12127,7 +12125,50 @@ $( document ).ready(code_toggle);
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-a-Martingale?">What is a Martingale?<a class="anchor-link" href="#What-is-a-Martingale?">&#182;</a></h3>
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Our-Method">Our Method<a class="anchor-link" href="#Our-Method">&#182;</a></h3><p>In this project we apply the idea of testing exchangeability online (Vovk et al., 2003) using a martingale framework to detect concept changes in time-varying data streams.</p>
+<p>In brief, the anomaly detection happens by performing the following steps:</p>
+<ol>
+<li>A data point from the incoming stream is observed.</li>
+<li>A strangeness measure is calculated.</li>
+<li>A p-value is calculated (H0 is no concept change).</li>
+<li>A randomized power martingale is constructed.</li>
+<li>A test is performed using the martingale value.</li>
+</ol>
+<h4 id="Strangeness">Strangeness<a class="anchor-link" href="#Strangeness">&#182;</a></h4><p>We wanted our strangeness measure to:</p>
+<ul>
+<li>be able to handle multi-dimensional time series  </li>
+<li>be able to handle unlabeled data</li>
+<li>be simple and flexible </li>
+</ul>
+<p>We decided to implement two methods, both based on the well-known k-nearest neighbors algorithm:</p>
+<ol>
+<li>Proximity based - maximum distance in the neighborhood.</li>
+<li>Density based - relative density in the neighborhood.</li>
+</ol>
+<p>The maximum distance in the neighborhood measure is straightforward: given a point and a neighborhood of size k, we find a distance to the furthest point away in the neighborhood.</p>
+<p>The relative density is a bit more involved. Given a neighborhood of size k, we measure density as an inverse of the sum of all distances between the point and its neighbors. The relative density is calculated by dividing the point density by sum of densities for all the k-nearest neighbors.</p>
+<h4 id="P-Values">P-Values<a class="anchor-link" href="#P-Values">&#182;</a></h4><p>is calculated as:</p>
+$$p = \frac{ count(i:a_{i} > a_{n}) + \theta*count(i:a_{i} = a_{n}) }{n}$$<p>where $a_{i}$ is the strangeness measure for $i-th$ observation and $\theta$ is randomly chosen from $[0, 1]$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Martingale">Martingale<a class="anchor-link" href="#Martingale">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -12167,6 +12208,8 @@ $( document ).ready(code_toggle);
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>is calculated as:</p>
+$$M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$$<p>where $\epsilon$ is a float value from $[0, 1]$</p>
 <p>A martingale is defined as any of several systems of betting in which a player increases the stake usually by doubling each time a bet is lost (reference <a href="https://www.system-martingale.com/">https://www.system-martingale.com/</a>).</p>
 <h4 id="History-of-the-term">History of the term<a class="anchor-link" href="#History-of-the-term">&#182;</a></h4><ol>
 <li>The concept of martingale in probability theory was introduced by Paul Pierre Levy (1935),</li>
@@ -12174,51 +12217,6 @@ $( document ).ready(code_toggle);
 <li>Part of the motivation for works on Martingale was to show the impossibility of successful betting strategies.</li>
 </ol>
 <h4 id="Why-it-represents-confidence">Why it represents confidence<a class="anchor-link" href="#Why-it-represents-confidence">&#182;</a></h4><p>?????</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Our-Method">Our Method<a class="anchor-link" href="#Our-Method">&#182;</a></h3><p>In this project we apply the idea of testing exchangeability online (Vovk et al., 2003) using a martingale framework to detect concept changes in time-varying data streams.</p>
-<p>In brief, the anomaly detection happens by performing the following steps:</p>
-<ol>
-<li>A data point from the incoming stream is observed.</li>
-<li>A strangeness measure is calculated.</li>
-<li>A p-value is calculated (H0 is no concept change).</li>
-<li>A randomized power martingale is constructed.</li>
-<li>A test is performed using the martingale value.</li>
-</ol>
-<h4 id="Strangeness">Strangeness<a class="anchor-link" href="#Strangeness">&#182;</a></h4><p>We wanted our strangeness measure to:</p>
-<ul>
-<li>be able to handle multi-dimensional time series  </li>
-<li>be able to handle unlabeled data</li>
-<li>be simple and flexible </li>
-</ul>
-<p>We decided to implement two methods, both based on the well-known k-nearest neighbors algorithm:</p>
-<ol>
-<li>Proximity based - maximum distance in the neighborhood.</li>
-<li>Density based - relative density in the neighborhood.</li>
-</ol>
-<p>The maximum distance in the neighborhood measure is straightforward: given a point and a neighborhood of size k, we find a distance to the furthest point away in the neighborhood.</p>
-<p>The relative density is a bit more involved. Given a neighborhood of size k, we measure density as an inverse of the sum of all distances between the point and its neighbors. The relative density is calculated by dividing the point density by sum of densities for all the k-nearest neighbors.</p>
-<h4 id="P-Values">P-Values<a class="anchor-link" href="#P-Values">&#182;</a></h4><p>is calculated as:</p>
-$$p = \frac{ count(i:a_{i} > a_{n}) + \theta*count(i:a_{i} = a_{n}) }{n}$$<p>where $a_{i}$ is the strangeness measure for $i-th$ observation and $\theta$ is randomly chosen from $[0, 1]$</p>
-<h4 id="Martingale">Martingale<a class="anchor-link" href="#Martingale">&#182;</a></h4><p>is calculated as:</p>
-$$M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$$<p>where $\epsilon$ is a float value from $[0, 1]$</p>
 
 </div>
 </div>
@@ -12499,12 +12497,6 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
 
 &lt;img src=&quot;images/msft_adj_close.png&quot;, width=554, height=419&gt;
-
-&lt;img src=&quot;images/outliers_first_diff.png&quot;, width=554, height=288&gt;
-
-&lt;img src=&quot;images/outliers_second_diff.png&quot;, width=554, height=288&gt;
-
-&lt;img src=&quot;images/one_class_svm.png&quot;, width=554, height=288&gt;
 </pre></div>
 
 </div>
@@ -12520,12 +12512,6 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 <div class="output_html rendered_html output_subarea ">
 
 <img src="images/msft_adj_close.png", width=554, height=419>
-
-<img src="images/outliers_first_diff.png", width=554, height=288>
-
-<img src="images/outliers_second_diff.png", width=554, height=288>
-
-<img src="images/one_class_svm.png", width=554, height=288>
 </div>
 
 </div>
@@ -12764,7 +12750,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Anomaly-Detection-with-an-Incresed-$\epsilon=0.95$">Anomaly Detection with an Incresed $\epsilon=0.95$<a class="anchor-link" href="#Anomaly-Detection-with-an-Incresed-$\epsilon=0.95$">&#182;</a></h4>
+<h4 id="Anomaly-Detection-with-an-Incresed-$\epsilon=0.96$">Anomaly Detection with an Incresed $\epsilon=0.96$<a class="anchor-link" href="#Anomaly-Detection-with-an-Incresed-$\epsilon=0.96$">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -12804,7 +12790,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Anomaly-Detection-with-a-Decreased-$\epsilon=0.89$">Anomaly Detection with a Decreased $\epsilon=0.89$<a class="anchor-link" href="#Anomaly-Detection-with-a-Decreased-$\epsilon=0.89$">&#182;</a></h4>
+<h4 id="Anomaly-Detection-with-a-Decreased-$\epsilon=0.88$">Anomaly Detection with a Decreased $\epsilon=0.88$<a class="anchor-link" href="#Anomaly-Detection-with-a-Decreased-$\epsilon=0.88$">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -12934,8 +12920,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Alteration on n_neighbors does not have a major influence on martingale values.</p>
-<p>In practical applications, the values of these two parameters need to be chosen carefully. In our analysis on Microsoft stock data, the default value of $n\_neighbors=5$ and $\epsilon=0.92$ seems to be reasonable regarding both accuracy and delay time.</p>
+<p>Alteration on both epsilon and n_neighbors can have some influence on martingale values, and then affect the decision on anomaly detection. In practical applications, the values of these two parameters need to be chosen carefully. In our analysis on Microsoft stock data, the default value of n_neighbors =5 and ϵ=0.92 seems to be reasonable while further analysis need to be done in order to determine a ideal parameter for our model.</p>
 
 </div>
 </div>
