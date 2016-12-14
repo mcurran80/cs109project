@@ -11929,7 +11929,7 @@ $( document ).ready(code_toggle);
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It is very easy to define what an outlier is if we know the underlying distribution shape. Let’s say we know our system generates observations from a normal distribution with a mean of 0.0 and standard deviation of 1.0, and we observe a value of 3.0. Knowing normal distribution properties, we could calculate that the probability of observing this value (or larger) is around 0.0013. It is quite low, and if we are willing to set our threshold at 0.025 (completely arbitrarily), then we could declare our observation an outlier (because the probability of our observation is lower than the threshold).</p>
 <p>‪Even if we don’t know anything about the underlying distribution, we could potentially use heuristic methods to define outliers. For example, in the Tukey method, if $value<Q1−1.5∗IQRvalue<Q1−1.5∗IQR$ or $value>Q3+1.5∗IQRvalue>Q3+1.5∗IQR$, then it is an outlier.</p>
-<p>I general, the terms “anomaly” and “outlier” are very often used interchangeably, but we’d like to use the term “anomaly” to describe something different from “outlier.”‬</p>
+<p>In general, the terms “anomaly” and “outlier” are very often used interchangeably, but we’d like to use the term “anomaly” to describe something different from “outlier.”‬</p>
 <p>Let’s say our null hypothesis is that we observe data points generated from some distribution with known properties.  Let’s also say we observed quite a few values which may be defined as “strange” or “unusual” considering our null hypothesis. At some point in time, we should reject our null hypothesis and conclude that we detected an anomaly.‬</p>
 <p>So we’d like to use term “anomaly” as a point in time where we think our null hypothesis does not stand any more.</p>
 <p>Even more generally, we’d like to call an “anomaly” a point of time where we believe the underlying distribution has changed even if we do not exactly know the shape of the distribution, so our null hypothesis becomes “there is no change in the underlying distribution.”‬</p>
@@ -12076,10 +12076,10 @@ $( document ).ready(code_toggle);
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>On the chart above, the red dots are outliers detected in the values representing the difference between the 120 day moving average and the closing price of the Microsoft stock. On those dates, the change in the price was somehow “extreme,” probably because they were much bigger than usual.</p>
-<p>We immediately realised we have a couple of problems:</p>
+<p>We immediately realized we have a couple of problems:</p>
 <ol>
 <li>We need a context. Using just the closing price or its derivatives could be truly misleading. We need to include more data about general market conditions, state of the economy, and state of the company on that date to truly see if something “extreme” happened. </li>
-<li>Detecting an outlier is of a limited use for us. It could be just a randomness in the process and we’d like to be able to capture the underlying change with some kind of confidence. </li>
+<li>Detecting an outlier is of a limited use for us. It could be just randomness in the process and we’d like to be able to capture the underlying change with some kind of confidence. </li>
 </ol>
 <p>That is the main difference between detecting outliers and anomalies: we detect outliers to exclude them from our model because they might just represent some randomness we do not want to capture.</p>
 <p>We detect anomalies to conclude (with some level of confidence) that something has changed in the underlying process. One way of looking at this would be to say that we have some variables not included in our model and not being observed and some of them are quite significant and their values have changed.</p>
@@ -12102,10 +12102,10 @@ $( document ).ready(code_toggle);
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Anomalies-in-Stock-Market-Data">Anomalies in Stock Market Data<a class="anchor-link" href="#Anomalies-in-Stock-Market-Data">&#182;</a></h3><p>Let’s face it – there’s been no anomalies in the stock market for past 10 years, since the participants started to use very powerful computers to find any kind of discrepancies and capitalize on the findings. We understand that and we set our goals at an appropriate level.</p>
+<h3 id="Anomalies-in-Stock-Market-Data">Anomalies in Stock Market Data<a class="anchor-link" href="#Anomalies-in-Stock-Market-Data">&#182;</a></h3><p>Let’s face it – there have been no anomalies in the stock market for past 10 years, since the participants started to use very powerful computers to find any kind of discrepancies and capitalize on the findings. We understand that and we set our goals at an appropriate level.</p>
 <p>We are likely to find anomalies because of our limited ability to collect, and process data and it is a problem but also a solution for us.</p>
 <p>First of all, it does not undermine the method we use. Given a better data set (more variables, less aggregation), this method should work better and produce less false positives.</p>
-<p>Second, our imperfect data gives us an opportunity to manually validate our results. After all, we are not going to have a training set, so we deal with unlabelled data and ultimately our method is unsupervised. But since our anomalies likely have some legitimate reasons (not captured in our data set) we could validate them by simply searching for any related and significant events that happened around the time of the anomaly. We should thank Google for that opportunity.</p>
+<p>Second, our imperfect data gives us an opportunity to manually validate our results. After all, we are not going to have a training set, so we deal with unlabeled data and ultimately our method is unsupervised. But since our anomalies likely have some legitimate reasons (not captured in our data set) we could validate them by simply searching for any related and significant events that happened around the time of the anomaly. We should thank Google for that opportunity.</p>
 
 </div>
 </div>
@@ -12216,7 +12216,7 @@ $$M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$$<p>where $\epsilon$ is a fl
 <li>Much of the original development of the theory was done by Doob (1949, Application of the theory of martingales; 1953, Stochastic Process).</li>
 <li>Part of the motivation for works on Martingale was to show the impossibility of successful betting strategies.</li>
 </ol>
-<h4 id="Why-it-represents-confidence">Why it represents confidence<a class="anchor-link" href="#Why-it-represents-confidence">&#182;</a></h4><p>?????</p>
+<h4 id="Why-it-represents-confidence">Why it represents confidence<a class="anchor-link" href="#Why-it-represents-confidence">&#182;</a></h4><p>In our model the martingale value represents a confidence level to reject the null hypothesis ('no changes in the system being observed'). It grows when the model observes "strange" values. The more strange values we observe, the bigger the martingale value (and the confidence).‬</p>
 
 </div>
 </div>
@@ -12245,15 +12245,15 @@ $$M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$$<p>where $\epsilon$ is a fl
 <p>In our experiment, it is not so obvious which distance should be used and why, but when we work with high dimensional data, we should try all of them.</p>
 <h4 id="KNN-based,-density,-proximity">KNN-based, density, proximity<a class="anchor-link" href="#KNN-based,-density,-proximity">&#182;</a></h4><p>With n_neighbors = 1, the relative density measure would not be able to detect observations slowly moving away from the cluster. It looks like we should use a 'conventional' value for n_neighbors (between 3 or 5 in most cases).</p>
 <p>The proximity measure did well in this scenario with all of the neighborhood sizes. It also looks like larger neighborhood sizes allow the measure to stay 'strange' for longer time periods (that is why it did well here).</p>
-<p>Again, the separate cluster forming was easily detected by both measures. The relative density appears a bit more stable and tolerant to initial cluster building, but the proximity measure could potentially produce large values for longer time periods, which could be beneficial as we would like our martingale to have enough time for confidence building.</p>
+<p>Again, the separate cluster forming was easily detected by both measures. The relative density appears a bit more stable and tolerant to initial cluster building, but the proximity measure could potentially produce large values for longer time periods, which could be beneficial, as we would like our martingale to have enough time for confidence building.</p>
 <p>It is obvious the martingale needs to build a confidence level by receiving quite a few small p-values before the threshold is reached. That might not work very well in conjunction with KNN-based metrics as the strangeness measure might go down as soon as the new neighborhood is built.</p>
 <p>This experiment highlights a possible weakness in our model: a small neighborhood size could prevent us from detecting underlying changes in the data stream. In this case, as soon as the number of observation in the separate cluster reached the neighborhood size, the relative density went down and the martingale did not have enough time to build the confidence.</p>
 <p>The proximity strangeness measure seems to be the weaker option. More investigation should be done to understand where it is applicable.</p>
 <h4 id="Epsilon">Epsilon<a class="anchor-link" href="#Epsilon">&#182;</a></h4><p>The initial martingale value is $M_{0} = 1.0$ and with every new observation we calculate the martingale value as $M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$, where $p$ is the p-value.</p>
 <p>Changing the epsilon value changes how quickly the martingale rises/falls in the presence of very small or large p-values.</p>
-<p>Let's simulate a stream of p-values perhaps indicating some change in the middle of the stream and observe changes in the martingale value for different epsilon values.</p>
-<p>From the chart above, we could see that small epsilon values should not be used for stable streams. A martingale calculated with epsilon = 0.15 would need more then 1000 observations with p-values of 0.1 to breach a threshold of 10.</p>
-<p>On the chart above, we see how the epsilon value plays a role in the martingale calculation. The concept change happens at step five and all the martingales reach maximum value around step 14 (at different levels). If we set the threshold at level 4.0, then a martingale with epsilon = 0.65 would detect the change at step 10 while martingale with epsilon 0.35 would detect the change at step 14. It looks like too small or too big an epsilon value might not be very sensitive to the changes, and the best performing epsilon values in this case are in 0.75 - 0.95 range.</p>
+<p>We simulated a stream of p-values perhaps indicating some change in the middle of the stream and observed changes in the martingale value for different epsilon values.</p>
+<p>We found that small epsilon values should not be used for stable streams. A martingale calculated with epsilon = 0.15 would need more then 1000 observations with p-values of 0.1 to breach a threshold of 10.</p>
+<p>We also saw how the epsilon value plays a role in the martingale calculation. The concept change happens at step five and all the martingales reach maximum value around step 14 (at different levels). If we set the threshold at level 4.0, then a martingale with epsilon = 0.65 would detect the change at step 10 while martingale with epsilon 0.35 would detect the change at step 14. It looks like too small or too big an epsilon value might not be very sensitive to the changes, and the best performing epsilon values in this case are in 0.75 - 0.95 range.</p>
 <h4 id="Default-Values">Default Values<a class="anchor-link" href="#Default-Values">&#182;</a></h4><ul>
 <li>the neighborhood consists of 3 neighbors</li>
 <li>density calculated relatively to total density in the neighborhood</li>
@@ -12407,16 +12407,6 @@ $$M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$$<p>where $\epsilon$ is a fl
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Detecting-Mutiple-Changes">Detecting Mutiple Changes<a class="anchor-link" href="#Detecting-Mutiple-Changes">&#182;</a></h4><p>Because of the way we calculate the p-values, we will not be able to detect some sequence of the concept changes. For example, if our system changes from state A to state B, we might be able to detect the change. But the change from B back to A will be unnoticeable because the values associated with state A had been observed before. We might be able to solve this problem by introducing some kind of expiration policy on the historical values.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 
 </div>
@@ -12427,8 +12417,7 @@ $$M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$$<p>where $\epsilon$ is a fl
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Method-We-Developed">Method We Developed<a class="anchor-link" href="#Method-We-Developed">&#182;</a></h3><h4 id="How-To-Use">How To Use<a class="anchor-link" href="#How-To-Use">&#182;</a></h4><p>?????</p>
-<h4 id="Parameters">Parameters<a class="anchor-link" href="#Parameters">&#182;</a></h4><p>Our class is called KNNAnomalyDetector and it accepts the following parameters:</p>
+<h3 id="Method-We-Developed">Method We Developed<a class="anchor-link" href="#Method-We-Developed">&#182;</a></h3><p>Our class is called KNNAnomalyDetector and it accepts the following parameters:</p>
 
 <pre><code>threshold - float, optional (default value 2.0)
     an anomaly is reported when the threshold is breached
@@ -12657,7 +12646,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If the martingale analysis was performed multiple times, a slightly different concept change date would be reported (charts for each repeats not shown). In a 10-time-repeat experiment, the resulting concept change dates range from March 31 to April 27, with the vast majority of dates from April 21 on.</p>
+<p>If the martingale analysis were performed multiple times, a slightly different concept change date would be reported (charts for each repeats not shown). In a 10-time-repeat experiment, the resulting concept change dates range from March 31 to April 27, with the vast majority of dates from April 21 on.</p>
 <p>The uncertain part in martingale-base anomaly detection is $\theta$, which is randomly chosen from [0,1] when calculating p. A smaller $\theta$ will result in a lower p value and a higher martingale value. Anomaly status of data points that has a martingale value around the threshold can easily be affected by the value of $\theta$.</p>
 
 </div>
@@ -12739,7 +12728,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>After reviewing the news and SEC filings on or up to 7 days before the concept change date, we found that on April 21 2016, Microsoft announced the Third Quarter Results, which included a 6% decline in fiscal third-quarter revenue to 20.5 billion and earnings of 3.8 billion which fell 25% year over year. This event is likely to be the causal factor inducing the stock price drop on April 22 2016.</p>
+<p>After reviewing the news and SEC filings on or up to 7 days before the concept change date, we found that on April 21 2016, Microsoft announced the Third Quarter Results, which included a 6% decline in fiscal third-quarter revenue to 20.5 billion and earnings of 3.8 billion, which fell 25% year over year. This event is likely to be the causal factor inducing the stock price drop on April 22 2016.</p>
 <p>There are two parameters in our model, $\epsilon$ and $n\_neighbors$, can affect whether a data point would be classified as anomaly or not. In the above analysis, $n\_neighbors=5$ and $\epsilon=0.92$ were used as default parameter values. Next, different parameter values are tried on Microsoft data.</p>
 
 </div>
@@ -12750,7 +12739,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Anomaly-Detection-with-an-Incresed-$\epsilon=0.96$">Anomaly Detection with an Incresed $\epsilon=0.96$<a class="anchor-link" href="#Anomaly-Detection-with-an-Incresed-$\epsilon=0.96$">&#182;</a></h4>
+<h4 id="Anomaly-Detection-with-an-Increased-$\epsilon=0.96$">Anomaly Detection with an Increased $\epsilon=0.96$<a class="anchor-link" href="#Anomaly-Detection-with-an-Increased-$\epsilon=0.96$">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -12930,7 +12919,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Analysing-Last-360-Days-of-MSFT-Stock">Analysing Last 360 Days of MSFT Stock<a class="anchor-link" href="#Analysing-Last-360-Days-of-MSFT-Stock">&#182;</a></h4>
+<h4 id="Analyzing-Last-360-Days-of-MSFT-Stock">Analyzing Last 360 Days of MSFT Stock<a class="anchor-link" href="#Analyzing-Last-360-Days-of-MSFT-Stock">&#182;</a></h4>
 </div>
 </div>
 </div>
