@@ -11751,7 +11751,18 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="CSCI-E-109a-Final-Project">CSCI E-109a Final Project<a class="anchor-link" href="#CSCI-E-109a-Final-Project">&#182;</a></h1><h2 id="Team-Members:-Melissa-Curran,-Alexander-Dubitskiy,-Deepika-Sinha,-Liangliang-Zhang">Team Members: Melissa Curran, Alexander Dubitskiy, Deepika Sinha, Liangliang Zhang<a class="anchor-link" href="#Team-Members:-Melissa-Curran,-Alexander-Dubitskiy,-Deepika-Sinha,-Liangliang-Zhang">&#182;</a></h2>
+<h3 id="CSCI-E-109a-Final-Project">CSCI E-109a Final Project<a class="anchor-link" href="#CSCI-E-109a-Final-Project">&#182;</a></h3><h3 id="Team-Members:-Melissa-Curran,-Alexander-Dubitskiy,-Deepika-Sinha,-Liangliang-Zhang">Team Members: Melissa Curran, Alexander Dubitskiy, Deepika Sinha, Liangliang Zhang<a class="anchor-link" href="#Team-Members:-Melissa-Curran,-Alexander-Dubitskiy,-Deepika-Sinha,-Liangliang-Zhang">&#182;</a></h3><hr>
+<h1 id="Martingale-Based-Anomaly-Detection-in-Stock-Market-Data?">Martingale Based Anomaly Detection in Stock Market Data?<a class="anchor-link" href="#Martingale-Based-Anomaly-Detection-in-Stock-Market-Data?">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Project code is available at <a href="https://github.com/adubitskiy/cs109-anomaly">https://github.com/adubitskiy/cs109-anomaly</a></p>
+
 </div>
 </div>
 </div>
@@ -11930,8 +11941,44 @@ $( document ).ready(code_toggle);
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It is very easy to define what an outlier is if we know the underlying distribution shape. Let’s say we know our system generates observations from a normal distribution with a mean of 0.0 and standard deviation of 1.0, and we observe a value of 3.0. Knowing normal distribution properties, we could calculate that the probability of observing this value (or larger) is around 0.0013. It is quite low, and if we are willing to set our threshold at 0.025 (completely arbitrarily), then we could declare our observation an outlier (because the probability of our observation is lower than the threshold).</p>
 <p>‪Even if we don’t know anything about the underlying distribution, we could potentially use heuristic methods to define outliers. For example, in the Tukey method, if:</p>
-$$value<Q1−1.5∗IQRvalue<Q1−1.5∗IQR$$<p>or</p>
-$$value>Q3+1.5∗IQRvalue>Q3+1.5∗IQR$$<p>then it is an outlier.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+$$value < Q1−1.5∗IQRvalue < Q1−1.5∗IQR$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>or</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+$$value >Q3+1.5∗IQRvalue >Q3+1.5∗IQR$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>then it is an outlier.</p>
 <p>In general, the terms “anomaly” and “outlier” are very often used interchangeably, but we’d like to use the term “anomaly” to describe something different from “outlier.”‬</p>
 <p>Let’s say our null hypothesis is that we observe data points generated from some distribution with known properties.  Let’s also say we observed quite a few values which may be defined as “strange” or “unusual” considering our null hypothesis. At some point in time, we should reject our null hypothesis and conclude that we detected an anomaly.‬</p>
 <p>So we’d like to use term “anomaly” as a point in time where we think our null hypothesis does not stand any more.</p>
@@ -12203,12 +12250,12 @@ $$p = \frac{ count(i:a_{i} > a_{n}) + \theta*count(i:a_{i} = a_{n}) }{n}$$<p>whe
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>is calculated as:</p>
 $$M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$$<p>where $\epsilon$ is a float value from $[0, 1]$</p>
-<p>A martingale is defined as any of several systems of betting in which a player increases the stake usually by doubling each time a bet is lost (reference <a href="https://www.system-martingale.com/">https://www.system-martingale.com/</a>).</p>
 <h4 id="History-of-the-term">History of the term<a class="anchor-link" href="#History-of-the-term">&#182;</a></h4><ol>
 <li>The concept of martingale in probability theory was introduced by Paul Pierre Levy (1935),</li>
 <li>Much of the original development of the theory was done by Doob (1949, Application of the theory of martingales; 1953, Stochastic Process).</li>
 <li>Part of the motivation for works on Martingale was to show the impossibility of successful betting strategies.</li>
 </ol>
+<p>A martingale is defined as any of several systems of betting in which a player increases the stake usually by doubling each time a bet is lost (reference <a href="https://www.system-martingale.com/">https://www.system-martingale.com/</a>).</p>
 <h4 id="Why-it-represents-confidence">Why it represents confidence<a class="anchor-link" href="#Why-it-represents-confidence">&#182;</a></h4><p>In our model the martingale value represents a confidence level to reject the null hypothesis ('no changes in the system being observed'). It grows when the model observes "strange" values. The more strange values we observe, the bigger the martingale value (and the confidence).‬</p>
 
 </div>
@@ -12411,42 +12458,13 @@ The data was obtained from <a href="https://www.microsoft.com/en-us/Investor/acq
 The data was obtained from <a href="https://www.microsoft.com/en-us/Investor/investment-history.aspx">https://www.microsoft.com/en-us/Investor/investment-history.aspx</a> and consists of the press release date and the company name. It was manually copied and converted into CSV format. In our dataset it is represented by the variable 'Investment', which takes a value of one if a press release happened on each given date and zero otherwise.</p>
 <p><strong>SEC Filings</strong>
 The SEC filings data was obtained from <a href="https://www.microsoft.com/en-us/Investor/sec-filings.aspx">https://www.microsoft.com/en-us/Investor/sec-filings.aspx</a>. It was manually copied and converted into CSV format. It was available from 1994 and consists of the filing date and the document type. In our dataset, it is represented by a set of dummy variables. The variable name is the document type and the value is one if the document type was filed on the date, zero otherwise.</p>
+<p><strong>News Headlines</strong>
+Microsoft news headlines data were obtained from <a href="http://www.factset.com/">http://www.factset.com/</a>. We downloaded only the last 5 years of news headlines for the analysis.</p>
 <p><strong>Data Refresh</strong>
 Only the adjusted closed price is automatically refreshed and includes the newest data. All other sources have to be manually updated by downloading relevant files from the sources.</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
-
-&lt;img src=&quot;images/msft_adj_close.png&quot;, width=554, height=419&gt;
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-<div class="output_html rendered_html output_subarea ">
-
-<img src="images/msft_adj_close.png", width=554, height=419>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -12469,7 +12487,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12510,7 +12528,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12551,7 +12569,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12585,7 +12603,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If the martingale analysis were performed multiple times, a slightly different concept change date would be reported (charts for each repeats not shown). In a 10-time-repeat experiment, the resulting concept change dates range from March 31 to April 27, with the vast majority of dates from April 21 on.</p>
+<p>If the martingale analysis were performed multiple times, a slightly different concept change date would be reported (charts for each repeats not shown). In a 10-time-repeat experiment, the resulting concept change dates range from April 21 to April 27, with an extra anomaly detected on March 31 in two of the runs.</p>
 <p>The uncertain part in martingale-base anomaly detection is $\theta$, which is randomly chosen from [0,1] when calculating p. A smaller $\theta$ will result in a lower p value and a higher martingale value. Anomaly status of data points that has a martingale value around the threshold can easily be affected by the value of $\theta$.</p>
 
 </div>
@@ -12602,7 +12620,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12633,7 +12651,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12684,7 +12702,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12724,7 +12742,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12764,7 +12782,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12804,7 +12822,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -12854,7 +12872,7 @@ Only the adjusted closed price is automatically refreshed and includes the newes
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
