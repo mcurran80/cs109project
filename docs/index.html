@@ -11955,7 +11955,7 @@ $$value>Q3+1.5∗IQRvalue>Q3+1.5∗IQR$$<p>then it is an outlier.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Why-We-Detect-Anomalies">Why We Detect Anomalies<a class="anchor-link" href="#Why-We-Detect-Anomalies">&#182;</a></h3><p>Well, we tried to detect outliers in the Microsoft stock. It turned out that nothing is normally distributed (we tried adjusted closing price, closing price change from previous day, and closing price difference from 7, 30 and 120 day moving averages and also some transformations of the previous including LOG, SQRT and some others). We had to look at one of the heuristic methods, the Turkey method, and saw something like:</p>
+<h3 id="Why-We-Detect-Anomalies">Why We Detect Anomalies<a class="anchor-link" href="#Why-We-Detect-Anomalies">&#182;</a></h3><p>Well, we tried to detect outliers in the Microsoft stock. It turned out that the variables we analyzed is not normally distributed (variables and their transformations). Below is the output when we used one of the heuristic methods, the Tukey method:</p>
 
 </div>
 </div>
@@ -12027,26 +12027,6 @@ $$value>Q3+1.5∗IQRvalue>Q3+1.5∗IQR$$<p>then it is an outlier.</p>
 <p>We are likely to find anomalies because of our limited ability to collect, and process data and it is a problem but also a solution for us.</p>
 <p>First of all, it does not undermine the method we use. Given a better data set (more variables, less aggregation), this method should work better and produce less false positives.</p>
 <p>Second, our imperfect data gives us an opportunity to manually validate our results. After all, we are not going to have a training set, so we deal with unlabeled data and ultimately our method is unsupervised. But since our anomalies likely have some legitimate reasons (not captured in our data set) we could validate them by simply searching for any related and significant events that happened around the time of the anomaly. We should thank Google for that opportunity.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
 
 </div>
 </div>
