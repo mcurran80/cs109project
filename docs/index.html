@@ -11824,7 +11824,8 @@ $( document ).ready(code_toggle);
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h3><p>Here is a chart of Microsoft adjusted closing price for the past 20 years:</p>
+<h3 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h3><p>The subject of detecting anomalies in the stock market is a very hot one. It could be used to detect insider trading, fraud, or simply to capitalize on the discrepancies. We do not have a supercomputer to compete with the data science departments of the major players, but we could surely implement and test a method.</p>
+<p>Here is a chart of Microsoft adjusted closing price for the past 20 years:</p>
 
 </div>
 </div>
@@ -11836,7 +11837,7 @@ $( document ).ready(code_toggle);
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
 
-&lt;img src=&quot;images/msft_adj_close.png&quot;, width=369, height=279&gt;
+&lt;img src=&quot;images/msft_adj_close.png&quot;, width=461, height=349&gt;
 </pre></div>
 
 </div>
@@ -11851,7 +11852,7 @@ $( document ).ready(code_toggle);
 
 <div class="output_html rendered_html output_subarea ">
 
-<img src="images/msft_adj_close.png", width=369, height=279>
+<img src="images/msft_adj_close.png", width=461, height=349>
 </div>
 
 </div>
@@ -11865,7 +11866,7 @@ $( document ).ready(code_toggle);
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If we only use this chart to draw our conclusions about the company, we could say that Microsoft enjoyed a rapid stock growth in the late nineties, followed by almost 13 years of stagnation, and finally enjoying a very impressive stock rally in the past few years. That is just the big picture, but if we look at the data in more detail, we’ll see many more local ups and downs during each month, week, and even each day (sadly, for this project we do not have the intraday data).</p>
+<p>Can we find any hidden knowledge here?</p>
 <p>Our goal for this project is to develop a system of detecting anomalies by observing the daily stock prices one by one (in so-called ‘online’ mode). We also would like to be able to do it with some configurable confidence level.</p>
 <p>At this point, we would like the reader to think about <em>anomalies</em> as unusual price levels or changes where we cannot explain why the price went up or down or stayed flat. We will expand upon this in the sections below.</p>
 
