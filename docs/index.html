@@ -12171,119 +12171,6 @@ $$M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$$<p>where $\epsilon$ is a fl
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Examples-of-Behavior">Examples of Behavior<a class="anchor-link" href="#Examples-of-Behavior">&#182;</a></h4><p>We created two simulated datasets to use in testing our algorithm.</p>
-<p>Sample 1: consists of a cluster of 100 points of stretched Gaussian data and a straight line of 10 points going away from the cluster. This represents a slow change.</p>
-<p>Sample 2: consists of a cluster of 30 points (less dense) of stretched Gaussian data and another cluster of 20 points building outside the main cluster. This represents a rapid change.</p>
-<p>Plots of these datasets are shown below.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>When running these sample datasets with the default parameters, we get the following results:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
-
-&lt;img src=&quot;images/sample1_default.png&quot;, width=877, height=489&gt;
-
-&lt;img src=&quot;images/sample2_default.png&quot;, width=877, height=489&gt;
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-<div class="output_html rendered_html output_subarea ">
-
-<img src="images/sample1_default.png", width=877, height=489>
-
-<img src="images/sample2_default.png", width=877, height=489>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>When running these sample datasets with the tuned parameters epsilon and neighborhood size, we get the following results:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
-
-&lt;img src=&quot;images/sample1_tuned.png&quot;, width=877, height=489&gt;
-
-&lt;img src=&quot;images/sample2_tuned.png&quot;, width=877, height=489&gt;
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-<div class="output_html rendered_html output_subarea ">
-
-<img src="images/sample1_tuned.png", width=877, height=489>
-
-<img src="images/sample2_tuned.png", width=877, height=489>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Review-of-Methods-of-Anomaly-Detection-in-Time-Series-Data">Review of Methods of Anomaly Detection in Time Series Data<a class="anchor-link" href="#Review-of-Methods-of-Anomaly-Detection-in-Time-Series-Data">&#182;</a></h3><p>Existing anomaly detection methods for stock market data can be classified based on how they transform the data prior to anomaly detection and their process of identifying anomalies. (Summary below adapted from Golmohammadi 2015)</p>
 <p><strong>Transformations:</strong> Before anomaly detection begins, data must be transformed in order to handle high dimensionality, scaling, and noise and to achieve computational efficiency. This can be done in three ways: aggregation, discretization, and signal processing.</p>
 <ul>
@@ -12398,6 +12285,119 @@ anomaly - string , 'level' or 'change,' default value 'level'
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Examples-of-Behavior">Examples of Behavior<a class="anchor-link" href="#Examples-of-Behavior">&#182;</a></h3><p>We created two simulated datasets to use in testing our algorithm.</p>
+<p>Sample 1: consists of a cluster of 100 points of stretched Gaussian data and a straight line of 10 points going away from the cluster. This represents a slow change.</p>
+<p>Sample 2: consists of a cluster of 30 points (less dense) of stretched Gaussian data and another cluster of 20 points building outside the main cluster. This represents a rapid change.</p>
+<p>Plots of these datasets are shown below.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When running these sample datasets with the default parameters, we get the following results:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
+
+&lt;img src=&quot;images/sample1_default.png&quot;, width=877, height=489&gt;
+
+&lt;img src=&quot;images/sample2_default.png&quot;, width=877, height=489&gt;
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+
+<img src="images/sample1_default.png", width=877, height=489>
+
+<img src="images/sample2_default.png", width=877, height=489>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When running these sample datasets with the tuned parameters epsilon and neighborhood size, we get the following results:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">html</span>
+
+&lt;img src=&quot;images/sample1_tuned.png&quot;, width=877, height=489&gt;
+
+&lt;img src=&quot;images/sample2_tuned.png&quot;, width=877, height=489&gt;
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+
+<img src="images/sample1_tuned.png", width=877, height=489>
+
+<img src="images/sample2_tuned.png", width=877, height=489>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
