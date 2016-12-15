@@ -11929,11 +11929,9 @@ $( document ).ready(code_toggle);
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It is very easy to define what an outlier is if we know the underlying distribution shape. Let’s say we know our system generates observations from a normal distribution with a mean of 0.0 and standard deviation of 1.0, and we observe a value of 3.0. Knowing normal distribution properties, we could calculate that the probability of observing this value (or larger) is around 0.0013. It is quite low, and if we are willing to set our threshold at 0.025 (completely arbitrarily), then we could declare our observation an outlier (because the probability of our observation is lower than the threshold).</p>
-<p>‪Even if we don’t know anything about the underlying distribution, we could potentially use heuristic methods to define outliers. For example, in the Tukey method, if:
-$$value<Q1−1.5∗IQRvalue<Q1−1.5∗IQR$$
-or
-$$value>Q3+1.5∗IQRvalue>Q3+1.5∗IQR$$
-then it is an outlier.</p>
+<p>‪Even if we don’t know anything about the underlying distribution, we could potentially use heuristic methods to define outliers. For example, in the Tukey method, if:</p>
+$$value<Q1−1.5∗IQRvalue<Q1−1.5∗IQR$$<p>or</p>
+$$value>Q3+1.5∗IQRvalue>Q3+1.5∗IQR$$<p>then it is an outlier.</p>
 <p>In general, the terms “anomaly” and “outlier” are very often used interchangeably, but we’d like to use the term “anomaly” to describe something different from “outlier.”‬</p>
 <p>Let’s say our null hypothesis is that we observe data points generated from some distribution with known properties.  Let’s also say we observed quite a few values which may be defined as “strange” or “unusual” considering our null hypothesis. At some point in time, we should reject our null hypothesis and conclude that we detected an anomaly.‬</p>
 <p>So we’d like to use term “anomaly” as a point in time where we think our null hypothesis does not stand any more.</p>
