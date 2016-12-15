@@ -12026,7 +12026,7 @@ $$value>Q3+1.5∗IQRvalue>Q3+1.5∗IQR$$<p>then it is an outlier.</p>
 <h3 id="Anomalies-in-Stock-Market-Data">Anomalies in Stock Market Data<a class="anchor-link" href="#Anomalies-in-Stock-Market-Data">&#182;</a></h3><p>Let’s face it – there have been no anomalies in the stock market for past 10 years, since the participants started to use very powerful computers to find any kind of discrepancies and capitalize on the findings. We understand that and we set our goals at an appropriate level.</p>
 <p>We are likely to find anomalies because of our limited ability to collect, and process data and it is a problem but also a solution for us.</p>
 <p>First of all, it does not undermine the method we use. Given a better data set (more variables, less aggregation), this method should work better and produce less false positives.</p>
-<p>Second, our imperfect data gives us an opportunity to manually validate our results. After all, we are not going to have a training set, so we deal with unlabeled data and ultimately our method is unsupervised. But since our anomalies likely have some legitimate reasons (not captured in our data set) we could validate them by simply searching for any related and significant events that happened around the time of the anomaly. We should thank Google for that opportunity.</p>
+<p>Second, our imperfect data gives us an opportunity to manually validate our results. After all, we are not going to have a training set, so we deal with unlabeled data and ultimately our method is unsupervised. But since our anomalies likely have some legitimate reasons (not captured in our data set) we could validate them by simply searching for any related and significant events that happened around the time of the anomaly.</p>
 
 </div>
 </div>
@@ -12137,7 +12137,7 @@ $$value>Q3+1.5∗IQRvalue>Q3+1.5∗IQR$$<p>then it is an outlier.</p>
 <li>A randomized power martingale is constructed.</li>
 <li>A test is performed using the martingale value.</li>
 </ol>
-<h4 id="Strangeness-and-Neighborhood-Size">Strangeness and Neighborhood Size<a class="anchor-link" href="#Strangeness-and-Neighborhood-Size">&#182;</a></h4><p>We wanted our strangeness measure to:</p>
+<h4 id="Strangeness-Measure">Strangeness Measure<a class="anchor-link" href="#Strangeness-Measure">&#182;</a></h4><p>We wanted our strangeness measure to:</p>
 <ul>
 <li>be able to handle multi-dimensional time series  </li>
 <li>be able to handle unlabeled data</li>
@@ -12150,12 +12150,6 @@ $$value>Q3+1.5∗IQRvalue>Q3+1.5∗IQR$$<p>then it is an outlier.</p>
 </ol>
 <p>The maximum distance in the neighborhood measure is straightforward: given a point and a neighborhood of size k, we find a distance to the furthest point away in the neighborhood.</p>
 <p>The relative density is a bit more involved. Given a neighborhood of size k, we measure density as an inverse of the sum of all distances between the point and its neighbors. The relative density is calculated by dividing the point density by sum of densities for all the k-nearest neighbors.</p>
-<h5 id="KNN-based,-density,-proximity">KNN-based, density, proximity<a class="anchor-link" href="#KNN-based,-density,-proximity">&#182;</a></h5><p>With n_neighbors = 1, the relative density measure would not be able to detect observations slowly moving away from the cluster. It looks like we should use a 'conventional' value for n_neighbors (between 3 or 5 in most cases).</p>
-<p>The proximity measure did well in this scenario with all of the neighborhood sizes. It also looks like larger neighborhood sizes allow the measure to stay 'strange' for longer time periods (that is why it did well here).</p>
-<p>Again, the separate cluster forming was easily detected by both measures. The relative density appears a bit more stable and tolerant to initial cluster building, but the proximity measure could potentially produce large values for longer time periods, which could be beneficial, as we would like our martingale to have enough time for confidence building.</p>
-<p>It is obvious the martingale needs to build a confidence level by receiving quite a few small p-values before the threshold is reached. That might not work very well in conjunction with KNN-based metrics as the strangeness measure might go down as soon as the new neighborhood is built.</p>
-<p>This experiment highlights a possible weakness in our model: a small neighborhood size could prevent us from detecting underlying changes in the data stream. In this case, as soon as the number of observation in the separate cluster reached the neighborhood size, the relative density went down and the martingale did not have enough time to build the confidence.</p>
-<p>The proximity strangeness measure seems to be the weaker option. More investigation should be done to understand where it is applicable.</p>
 <h5 id="Epsilon">Epsilon<a class="anchor-link" href="#Epsilon">&#182;</a></h5><p>The initial martingale value is $M_{0} = 1.0$ and with every new observation we calculate the martingale value as $M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$, where $p$ is the p-value.</p>
 <p>Changing the epsilon value changes how quickly the martingale rises/falls in the presence of very small or large p-values.</p>
 <p>We simulated a stream of p-values perhaps indicating some change in the middle of the stream and observed changes in the martingale value for different epsilon values.</p>
