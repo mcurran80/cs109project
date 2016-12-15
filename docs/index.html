@@ -12150,17 +12150,6 @@ $$value>Q3+1.5∗IQRvalue>Q3+1.5∗IQR$$<p>then it is an outlier.</p>
 </ol>
 <p>The maximum distance in the neighborhood measure is straightforward: given a point and a neighborhood of size k, we find a distance to the furthest point away in the neighborhood.</p>
 <p>The relative density is a bit more involved. Given a neighborhood of size k, we measure density as an inverse of the sum of all distances between the point and its neighbors. The relative density is calculated by dividing the point density by sum of densities for all the k-nearest neighbors.</p>
-<h5 id="Epsilon">Epsilon<a class="anchor-link" href="#Epsilon">&#182;</a></h5><p>The initial martingale value is $M_{0} = 1.0$ and with every new observation we calculate the martingale value as $M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$, where $p$ is the p-value.</p>
-<p>Changing the epsilon value changes how quickly the martingale rises/falls in the presence of very small or large p-values.</p>
-<p>We simulated a stream of p-values perhaps indicating some change in the middle of the stream and observed changes in the martingale value for different epsilon values.</p>
-<p>We found that small epsilon values should not be used for stable streams. A martingale calculated with epsilon = 0.15 would need more then 1000 observations with p-values of 0.1 to breach a threshold of 10.</p>
-<p>We also saw how the epsilon value plays a role in the martingale calculation. The concept change happens at step five and all the martingales reach maximum value around step 14 (at different levels). If we set the threshold at level 4.0, then a martingale with epsilon = 0.65 would detect the change at step 10 while martingale with epsilon 0.35 would detect the change at step 14. It looks like too small or too big an epsilon value might not be very sensitive to the changes, and the best performing epsilon values in this case are in 0.75 - 0.95 range.</p>
-<h5 id="Default-Values">Default Values<a class="anchor-link" href="#Default-Values">&#182;</a></h5><ul>
-<li>the neighborhood consists of 3 neighbors</li>
-<li>density calculated relatively to total density in the neighborhood</li>
-<li>euclidean distance is used</li>
-<li>epsilon = 0.92</li>
-</ul>
 <h4 id="P-Values">P-Values<a class="anchor-link" href="#P-Values">&#182;</a></h4><p>is calculated as:</p>
 $$p = \frac{ count(i:a_{i} > a_{n}) + \theta*count(i:a_{i} = a_{n}) }{n}$$<p>where $a_{i}$ is the strangeness measure for $i-th$ observation and $\theta$ is randomly chosen from $[0, 1]$</p>
 
@@ -12221,6 +12210,20 @@ $$M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$$<p>where $\epsilon$ is a fl
 <li>Part of the motivation for works on Martingale was to show the impossibility of successful betting strategies.</li>
 </ol>
 <h4 id="Why-it-represents-confidence">Why it represents confidence<a class="anchor-link" href="#Why-it-represents-confidence">&#182;</a></h4><p>In our model the martingale value represents a confidence level to reject the null hypothesis ('no changes in the system being observed'). It grows when the model observes "strange" values. The more strange values we observe, the bigger the martingale value (and the confidence).‬</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Epsilon">Epsilon<a class="anchor-link" href="#Epsilon">&#182;</a></h4><p>The initial martingale value is $M_{0} = 1.0$ and with every new observation we calculate the martingale value as $M_{n} = \epsilon p_{n}^{(\epsilon - 1)} M_{n - 1}$, where $p$ is the p-value.</p>
+<p>Changing the epsilon value changes how quickly the martingale rises/falls in the presence of very small or large p-values.</p>
+<p>We simulated a stream of p-values perhaps indicating some change in the middle of the stream and observed changes in the martingale value for different epsilon values.</p>
+<p>We found that small epsilon values should not be used for stable streams. A martingale calculated with epsilon = 0.15 would need more then 1000 observations with p-values of 0.1 to breach a threshold of 10.</p>
+<p>We also saw how the epsilon value plays a role in the martingale calculation. The concept change happens at step five and all the martingales reach maximum value around step 14 (at different levels). If we set the threshold at level 4.0, then a martingale with epsilon = 0.65 would detect the change at step 10 while martingale with epsilon 0.35 would detect the change at step 14. It looks like too small or too big an epsilon value might not be very sensitive to the changes, and the best performing epsilon values in this case are in 0.75 - 0.95 range.</p>
 
 </div>
 </div>
